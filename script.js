@@ -49,3 +49,17 @@ numbers.forEach((number) => {
     }
   });
 });
+
+const operators = document.querySelectorAll(".operator");
+operators.forEach((o) => {
+  o.addEventListener("click", (e) => {
+    if (operator === "") {
+      operator = o.textContent;
+      addToFirst = true;
+    } else {
+      alert(
+        "you already have an operator, clear the calculator to select another",
+      );
+    }
+  });
+});
