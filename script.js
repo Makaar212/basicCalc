@@ -37,16 +37,23 @@ function operate(op, f, s) {
   }
 }
 
+const display = document.querySelector(".numberDisplay");
+function updateDisplay() {
+  if (first) {
+    solution = "";
+  }
+  display.textContent = `${first} ${operator} ${second} ${solution}`;
+}
+
 const numbers = document.querySelectorAll(".number");
-console.log(numbers);
 numbers.forEach((number) => {
   number.addEventListener("click", (e) => {
     if (addToFirst) {
       first += number.textContent;
-      console.log(first);
+      updateDisplay();
     } else {
       second += number.textContent;
-      console.log(second);
+      updateDisplay();
     }
   });
 });
@@ -55,7 +62,13 @@ const operators = document.querySelectorAll(".operator");
 operators.forEach((o) => {
   o.addEventListener("click", (e) => {
     if (operator === "") {
-      operator = o.textContent;
+      if (o.textContent === "x") {
+        operator = "*";
+      } else {
+        operator = o.textContent;
+      }
+      updateDisplay();
+
       addToFirst = false;
     } else {
       alert(
@@ -75,5 +88,6 @@ equals.addEventListener("click", (e) => {
     addToFirst = true;
     second = "";
     operator = "";
+    updateDisplay();
   }
 });
