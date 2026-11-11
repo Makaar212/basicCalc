@@ -2,6 +2,7 @@ let first = "";
 let operator = "";
 let second = "";
 let addToFirst = true;
+let solution = "";
 
 function add(a, b) {
   return a + b;
@@ -55,11 +56,24 @@ operators.forEach((o) => {
   o.addEventListener("click", (e) => {
     if (operator === "") {
       operator = o.textContent;
-      addToFirst = true;
+      addToFirst = false;
     } else {
       alert(
-        "you already have an operator, clear the calculator to select another",
+        "you already have an operator, clear the calculator to select another or fill out the seocnd number",
       );
     }
   });
+});
+
+const equals = document.querySelector(".equals");
+equals.addEventListener("click", (e) => {
+  if (first === "" || second === "") {
+    alert("Finish your expression");
+  } else if (first && second) {
+    solution = operate(operator, Number(first), Number(second));
+    first = "";
+    addToFirst = true;
+    second = "";
+    operator = "";
+  }
 });
