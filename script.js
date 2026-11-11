@@ -59,20 +59,29 @@ numbers.forEach((number) => {
 });
 
 const operators = document.querySelectorAll(".operator");
+function operatorCheck(op) {
+  if (op === "x") {
+    operator = "*";
+  } else {
+    operator = op;
+  }
+}
 operators.forEach((o) => {
   o.addEventListener("click", (e) => {
     if (first === "") {
       return;
     }
     if (operator === "") {
-      if (o.textContent === "x") {
-        operator = "*";
-      } else {
-        operator = o.textContent;
-      }
+      operatorCheck(o.textContent);
       updateDisplay();
 
       addToFirst = false;
+    } else if (first && second) {
+      first = operate(operator, Number(first), Number(second));
+      second = "";
+
+      operatorCheck(o.textContent);
+      updateDisplay();
     } else {
       alert(
         "you already have an operator, clear the calculator to select another or fill out the seocnd number",
@@ -97,11 +106,12 @@ equals.addEventListener("click", (e) => {
 
 const clear = document.querySelector(".clear");
 
-clear.addEventListener("click", (e) => {
+clear.addEventListener("click", clearDisplay);
+function clearDisplay() {
   first = "";
   second = "";
   solution = "";
   operator = "";
   addToFirst = true;
   updateDisplay();
-});
+}
