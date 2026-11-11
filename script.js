@@ -1,6 +1,7 @@
-let first;
-let operator;
-let second;
+let first = "";
+let operator = "";
+let second = "";
+let addToFirst = true;
 
 function add(a, b) {
   return a + b;
@@ -34,3 +35,17 @@ function operate(op, f, s) {
       return divide(f, s);
   }
 }
+
+const numbers = document.querySelectorAll(".number");
+console.log(numbers);
+numbers.forEach((number) => {
+  number.addEventListener("click", (e) => {
+    if (addToFirst) {
+      first += number.textContent;
+      console.log(first);
+    } else {
+      second += number.textContent;
+      console.log(second);
+    }
+  });
+});
