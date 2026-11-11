@@ -68,10 +68,7 @@ function operatorCheck(op) {
 }
 operators.forEach((o) => {
   o.addEventListener("click", (e) => {
-    if (first === "") {
-      return;
-    }
-    if (operator === "") {
+    if (operator === "" && !solution) {
       operatorCheck(o.textContent);
       updateDisplay();
 
@@ -80,6 +77,12 @@ operators.forEach((o) => {
       first = operate(operator, Number(first), Number(second));
       second = "";
 
+      operatorCheck(o.textContent);
+      updateDisplay();
+    } else if (solution) {
+      first = solution;
+      solution = "";
+      addToFirst = false;
       operatorCheck(o.textContent);
       updateDisplay();
     } else {
@@ -105,7 +108,6 @@ equals.addEventListener("click", (e) => {
 });
 
 const clear = document.querySelector(".clear");
-
 clear.addEventListener("click", clearDisplay);
 function clearDisplay() {
   first = "";
