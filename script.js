@@ -61,6 +61,9 @@ numbers.forEach((number) => {
 const operators = document.querySelectorAll(".operator");
 operators.forEach((o) => {
   o.addEventListener("click", (e) => {
+    if (first === "") {
+      return;
+    }
     if (operator === "") {
       if (o.textContent === "x") {
         operator = "*";
@@ -90,4 +93,15 @@ equals.addEventListener("click", (e) => {
     operator = "";
     updateDisplay();
   }
+});
+
+const clear = document.querySelector(".clear");
+
+clear.addEventListener("click", (e) => {
+  first = "";
+  second = "";
+  solution = "";
+  operator = "";
+  addToFirst = true;
+  updateDisplay();
 });
